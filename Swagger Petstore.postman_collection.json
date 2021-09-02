@@ -1,0 +1,363 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Swagger Petstore",
+		"_postman_id": "90ff4767-f2be-a240-ebbd-0c8ccd4ed384",
+		"description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "pet",
+			"description": "Folder for pet",
+			"item": [
+				{
+					"name": "Update an existing pet",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Successful PUT request\"] = responseCode.code === 200 || responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 1000mc\"] = responseTime < 1000;",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/pet",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 0,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new pet to the store",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"id\"] = responseBody.has(\"id\");",
+									"",
+									"tests[\"category\"] = responseBody.has(\"category\");",
+									"",
+									"tests[\"name\"] = responseBody.has(\"name\");",
+									"",
+									"",
+									"",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Successful POST request\"] = responseCode.code === 200 || responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/pet",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 100101,\r\n  \"category\": {\r\n    \"id\": 0,\r\n    \"name\": \"string\"\r\n  },\r\n  \"name\": \"doggie\",\r\n  \"photoUrls\": [\r\n    \"string\"\r\n  ],\r\n  \"tags\": [\r\n    {\r\n      \"id\": 0,\r\n      \"name\": \"string\"\r\n    }\r\n  ],\r\n  \"status\": \"available\"\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Finds Pets by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"id\"] = responseBody.has(\"id\");",
+									"",
+									"tests[\"name\"] = responseBody.has(\"name\");",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 2000;",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Successful GET request\"] = responseCode.code === 200 || responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "https://petstore.swagger.io/v2/pet/findByStatus?status=available",
+							"protocol": "https",
+							"host": [
+								"petstore",
+								"swagger",
+								"io"
+							],
+							"path": [
+								"v2",
+								"pet",
+								"findByStatus"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "available",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Multiple status values can be provided with comma separated strings"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "store",
+			"description": "Folder for store",
+			"item": [
+				{
+					"name": "Returns pet inventories by status",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"available\"] = responseBody.has(\"available\");",
+									"",
+									"tests[\"sold\"] = responseBody.has(\"sold\");",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"",
+									"tests[\"Successful GET request\"] = responseCode.code === 200 || responseCode.code === 200;",
+									"",
+									"",
+									"",
+									"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/store/inventory",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": "Returns a map of status codes to quantities"
+					},
+					"response": []
+				},
+				{
+					"name": "Place an order for a pet",
+					"request": {
+						"url": "https://petstore.swagger.io/v2/store/order",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 2,\r\n  \"petId\": 2,\r\n  \"quantity\": 2,\r\n  \"shipDate\": \"2021-09-02T12:57:39.728Z\",\r\n  \"status\": \"placed\",\r\n  \"complete\": true\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Find purchase order by ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"id\"] = responseBody.has(\"id\");",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;",
+									"",
+									"tests[\"GET\"] = responseCode.code === 200 || responseCode.code === 200;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/store/order/2",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							},
+							{
+								"key": "",
+								"value": "",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {},
+						"description": "For valid response try integer IDs with value >= 1 and <= 10. Other values will generated exceptions"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"description": "Folder for user",
+			"item": [
+				{
+					"name": "Get user by user name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 404\"] = responseCode.code === 404;",
+									"",
+									"tests[\"Successful GET request\"] = responseCode.code === 404 || responseCode.code === 404;",
+									"",
+									"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/user/Ahmed",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							}
+						],
+						"body": {},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "Updated user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 405\"] = responseCode.code === 405;",
+									"",
+									"",
+									"",
+									"tests[\"Response time is less than 2000ms\"] = responseTime < 2000;",
+									"",
+									"tests[\"Successful PUT request\"] = responseCode.code === 405 || responseCode.code === 405;"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "https://petstore.swagger.io/v2/user/",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json, application/xml",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "Ahmed",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "This can only be done by the logged in user."
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
